@@ -2,6 +2,10 @@
 
 Programa em C para calcular os materiais de um traço de concreto.
 
+## Dependências
+
+Para compilar a interface gráfica é necessário ter as bibliotecas de desenvolvimento do Qt instaladas (pacote `qtbase5-dev` no Debian/Ubuntu).
+
 ## Compilação e testes
 
 Primeiro execute o script `configure` para definir o prefixo de instalação (padrão `/usr/local`):
@@ -26,7 +30,8 @@ sudo make install
 ```
 
 O executável será copiado para `$(PREFIX)/bin`.
-O binário compilado fica disponível em `build/concreto`.
+Os binários compilados ficam disponíveis em `build/concreto` (CLI) e
+`build/concreto-gui` (interface gráfica Qt).
 
 Para instalar a página de manual utilize:
 
@@ -59,4 +64,6 @@ Execute passando o traço no formato `a-b-c`, a granulometria do agregado graúd
 ```
 
 O programa exibirá as quantidades de cimento, água, areia e brita necessárias para produzir o volume informado. Os volumes são mostrados em litros.
+
+Também é possível utilizar a interface gráfica executando `concreto-gui` após a instalação ou abrindo o atalho criado pelo pacote.
 
