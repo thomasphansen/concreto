@@ -6,8 +6,8 @@ MANDIR = $(PREFIX)/share/man/man1
 DESKTOPDIR = $(PREFIX)/share/applications
 CC = gcc
 CXX = g++
-CFLAGS = -Wall -Wextra -O2
-CXXFLAGS = -Wall -Wextra -O2
+CFLAGS = -Wall -Wextra -O2 -fPIC
+CXXFLAGS = -Wall -Wextra -O2 -fPIC
 QT_CFLAGS := $(shell pkg-config --cflags Qt6Widgets 2>/dev/null || pkg-config --cflags Qt5Widgets)
 QT_LIBS := $(shell pkg-config --libs Qt6Widgets 2>/dev/null || pkg-config --libs Qt5Widgets)
 VERSION ?= 1.0
@@ -76,6 +76,7 @@ deb: clean all
 	echo 'Section: utils' >> $(BUILDDIR)/debian/DEBIAN/control
 	echo 'Priority: optional' >> $(BUILDDIR)/debian/DEBIAN/control
 	echo 'Architecture: amd64' >> $(BUILDDIR)/debian/DEBIAN/control
+	echo 'Depends: libc6 (>= 2.34), libqt5widgets5 (>= 5.15)' >> $(BUILDDIR)/debian/DEBIAN/control
 	echo 'Maintainer: Unknown <unknown@example.com>' >> $(BUILDDIR)/debian/DEBIAN/control
 	echo 'Description: Concreto computes concrete mix material quantities.' >> $(BUILDDIR)/debian/DEBIAN/control
 	install -m 755 $(OUTDIR)/concreto $(BUILDDIR)/debian$(BINDIR)/concreto
