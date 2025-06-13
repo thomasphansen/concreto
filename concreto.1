@@ -1,0 +1,35 @@
+.TH CONCRETO 1 "" "" "Concreto Manual"
+.SH NAME
+concreto \- compute concrete mix material quantities
+.SH SYNOPSIS
+.B concreto
+.I RATIO GRANULOMETRY VOLUME
+.SH DESCRIPTION
+The \fBconcreto\fR command calculates how much cement, water, sand and gravel
+are needed to produce a desired volume of concrete. It expects three
+parameters:
+.TP
+\fIRATIO\fR
+Mix ratio in the form \fIa-b-c\fR. The values represent the relative parts of
+cement, sand and gravel.
+.TP
+\fIGRANULOMETRY\fR
+Maximum aggregate size in millimetres. This value determines the
+water--cement ratio used in the calculations.
+.TP
+\fIVOLUME\fR
+Desired volume of concrete in cubic metres.
+.PP
+The program prints the mass and volume for each material required by the
+mix.
+.SH EXAMPLE
+To compute the materials for a 1:2:3 mix using 20\ mm aggregate in order to
+produce one cubic metre of concrete, run:
+.PP
+.nf
+concreto 1-2-3 20 1.0
+.fi
+.SH AUTHOR
+Unknown
+.SH COPYRIGHT
+GPL-3.0-or-later
