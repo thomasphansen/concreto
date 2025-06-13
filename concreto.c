@@ -1,57 +1,79 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <math.h>
 
-#define DENSITY_CEMENT 1440.0 // kg per cubic meter
-#define DENSITY_SAND 1600.0   // kg per cubic meter
-#define DENSITY_GRAVEL 1550.0 // kg per cubic meter
+#include "concreto.h"
 
-static double wc_ratio(double granulometry) {
-    if (granulometry <= 10.0) return 0.65; // finer aggregates -> more water
+int parse_ratio(const char *str, MixRatio *ratio) {
+    double a = 0, b = 0, c = 0;
+    if (sscanf(str, "%lf-%lf-%lf", &a, &b, &c) != 3 || a <= 0 || b <= 0 || c <= 0)
+        return 0;
+    ratio->cement = a;
+    ratio->sand = b;
+    ratio->gravel = c;
+    return 1;
+}
+
+double wc_ratio(double granulometry) {
+    if (granulometry <= 10.0) return 0.65;
     if (granulometry <= 20.0) return 0.60;
     if (granulometry <= 40.0) return 0.55;
     return 0.50;
 }
 
+Volumes compute_volumes(double total_volume, MixRatio ratio) {
+    double sum = ratio.cement + ratio.sand + ratio.gravel;
+    Volumes v;
+    v.cement = total_volume * (ratio.cement / sum);
+    v.sand = total_volume * (ratio.sand / sum);
+    v.gravel = total_volume * (ratio.gravel / sum);
+    return v;
+}
+
+Masses compute_masses(Volumes volumes, double granulometry) {
+    Masses m;
+    m.cement = volumes.cement * DENSITY_CEMENT;
+    m.sand = volumes.sand * DENSITY_SAND;
+    m.gravel = volumes.gravel * DENSITY_GRAVEL;
+    m.water = m.cement * wc_ratio(granulometry);
+    return m;
+}
+
+#ifndef UNIT_TEST
 int main(int argc, char *argv[]) {
     if (argc != 4) {
         fprintf(stderr, "Uso: %s <traco a-b-c> <granulometria_mm> <volume_m3>\n", argv[0]);
         return 1;
     }
 
-    double a = 0, b = 0, c = 0;
-    if (sscanf(argv[1], "%lf-%lf-%lf", &a, &b, &c) != 3 || a <= 0 || b <= 0 || c <= 0) {
-        fprintf(stderr, "Formato de tra\303\247o inv\303\241lido: %s\n", argv[1]);
+    MixRatio ratio;
+    if (!parse_ratio(argv[1], &ratio)) {
+        fprintf(stderr, "Formato de tra\xC3\xA7o inv\xC3\xA1lido: %s\n", argv[1]);
         return 1;
     }
 
     double granulometry = atof(argv[2]);
     if (granulometry <= 0) {
-        fprintf(stderr, "Granulometria inv\303\241lida: %s\n", argv[2]);
+        fprintf(stderr, "Granulometria inv\xC3\xA1lida: %s\n", argv[2]);
         return 1;
     }
 
     double volume = atof(argv[3]);
     if (volume <= 0) {
-        fprintf(stderr, "Volume inv\303\241lido: %s\n", argv[3]);
+        fprintf(stderr, "Volume inv\xC3\xA1lido: %s\n", argv[3]);
         return 1;
     }
 
-    double sum_parts = a + b + c;
-    double cement_vol = volume * (a / sum_parts);
-    double sand_vol = volume * (b / sum_parts);
-    double gravel_vol = volume * (c / sum_parts);
+    Volumes vols = compute_volumes(volume, ratio);
+    Masses masses = compute_masses(vols, granulometry);
 
-    double cement_mass = cement_vol * DENSITY_CEMENT;
-    double sand_mass = sand_vol * DENSITY_SAND;
-    double gravel_mass = gravel_vol * DENSITY_GRAVEL;
+    double water_vol = masses.water / DENSITY_WATER;
 
-    double water_mass = cement_mass * wc_ratio(granulometry);
-
-    printf("Cimento: %.2f kg\n", cement_mass);
-    printf("Agua: %.2f kg\n", water_mass);
-    printf("Areia: %.2f kg\n", sand_mass);
-    printf("Brita: %.2f kg\n", gravel_mass);
+    printf("Cimento: %.2f kg (%.2f m3)\n", masses.cement, vols.cement);
+    printf("Agua: %.2f kg (%.2f m3)\n", masses.water, water_vol);
+    printf("Areia: %.2f kg (%.2f m3)\n", masses.sand, vols.sand);
+    printf("Brita: %.2f kg (%.2f m3)\n", masses.gravel, vols.gravel);
 
     return 0;
 }
+#endif
