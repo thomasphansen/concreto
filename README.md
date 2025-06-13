@@ -2,6 +2,10 @@
 
 Programa em C para calcular os materiais de um traço de concreto.
 
+## Dependências
+
+Para compilar a interface gráfica é necessário ter as bibliotecas de desenvolvimento do Qt instaladas (pacote `qtbase5-dev` no Debian/Ubuntu).
+
 ## Compilação e testes
 
 Primeiro execute o script `configure` para definir o prefixo de instalação (padrão `/usr/local`):
