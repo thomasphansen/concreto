@@ -4,6 +4,7 @@ PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
 CC = gcc
 CFLAGS = -Wall -Wextra -O2
+VERSION ?= 1.0
 
 OBJS = concreto.o
 
@@ -35,7 +36,7 @@ clean:
 deb: clean all
 	mkdir -p debian/DEBIAN debian$(BINDIR)
 	echo 'Package: concreto' > debian/DEBIAN/control
-	echo 'Version: 1.0' >> debian/DEBIAN/control
+	echo 'Version: $(VERSION)' >> debian/DEBIAN/control
 	echo 'Section: utils' >> debian/DEBIAN/control
 	echo 'Priority: optional' >> debian/DEBIAN/control
 	echo 'Architecture: amd64' >> debian/DEBIAN/control
@@ -43,4 +44,3 @@ deb: clean all
 	echo 'Description: Concreto computes concrete mix material quantities.' >> debian/DEBIAN/control
 	install -m 755 concreto debian$(BINDIR)/concreto
 	dpkg-deb --build debian Concreto.deb
-

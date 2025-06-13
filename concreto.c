@@ -69,10 +69,10 @@ int main(int argc, char *argv[]) {
 
     double water_vol = masses.water / DENSITY_WATER;
 
-    printf("Cimento: %.2f kg (%.2f m3)\n", masses.cement, vols.cement);
-    printf("Agua: %.2f kg (%.2f m3)\n", masses.water, water_vol);
-    printf("Areia: %.2f kg (%.2f m3)\n", masses.sand, vols.sand);
-    printf("Brita: %.2f kg (%.2f m3)\n", masses.gravel, vols.gravel);
+    printf("Cimento: %.2f kg (%.2f L)\n", masses.cement, vols.cement * 1000.0);
+    printf("Agua: %.2f kg (%.2f L)\n", masses.water, water_vol * 1000.0);
+    printf("Areia: %.2f kg (%.2f L)\n", masses.sand, vols.sand * 1000.0);
+    printf("Brita: %.2f kg (%.2f L)\n", masses.gravel, vols.gravel * 1000.0);
 
     return 0;
 }
