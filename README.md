@@ -1,13 +1,44 @@
-# concreto
+# Concreto
 
 Programa em C para calcular os materiais de um traço de concreto.
 
-## Compilação
+## Compilação e testes
 
-Use o `gcc` para compilar:
+Primeiro execute o script `configure` para definir o prefixo de instalação (padrão `/usr/local`):
 
 ```bash
-gcc -o concreto concreto.c
+./configure
+```
+
+Em seguida compile e rode os testes:
+
+```bash
+make
+make test
+```
+
+## Instalação
+
+Para instalar o binário no sistema utilize:
+
+```bash
+sudo make install
+```
+
+O executável será copiado para `$(PREFIX)/bin`.
+
+## Criação do pacote Debian
+
+É possível gerar um pacote `.deb` executando:
+
+```bash
+make deb
+```
+
+O arquivo `Concreto.deb` será criado e pode ser instalado com:
+
+```bash
+sudo dpkg -i Concreto.deb
 ```
 
 ## Uso
@@ -19,3 +50,4 @@ Execute passando o traço no formato `a-b-c`, a granulometria do agregado graúd
 ```
 
 O programa exibirá as quantidades de cimento, água, areia e brita necessárias para produzir o volume informado.
+

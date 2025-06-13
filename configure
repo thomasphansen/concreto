@@ -1,0 +1,12 @@
+#!/bin/sh
+prefix=/usr/local
+for arg in "$@"; do
+  case "$arg" in
+    --prefix=*) prefix="${arg#*=}";;
+  esac
+done
+cat > config.mk <<EOM
+PREFIX=${prefix}
+EOM
+echo "Configured with prefix $prefix"
+
