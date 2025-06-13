@@ -26,6 +26,7 @@ sudo make install
 ```
 
 O executável será copiado para `$(PREFIX)/bin`.
+O binário compilado fica disponível em `build/concreto`.
 
 Para instalar a página de manual utilize:
 
@@ -41,10 +42,10 @@ sudo make manpage
 make deb
 ```
 
-O arquivo `Concreto.deb` será criado e pode ser instalado com:
+O arquivo `build/Concreto.deb` será criado e pode ser instalado com:
 
 ```bash
-sudo dpkg -i Concreto.deb
+sudo dpkg -i build/Concreto.deb
 ```
 
 O pacote já inclui a página de manual em `man1/concreto.1.gz`.
@@ -54,7 +55,7 @@ O pacote já inclui a página de manual em `man1/concreto.1.gz`.
 Execute passando o traço no formato `a-b-c`, a granulometria do agregado graúdo em milímetros e o volume desejado em metros cúbicos:
 
 ```bash
-./concreto 1-2-3 20 1.0
+./build/concreto 1-2-3 20 1.0
 ```
 
 O programa exibirá as quantidades de cimento, água, areia e brita necessárias para produzir o volume informado. Os volumes são mostrados em litros.
