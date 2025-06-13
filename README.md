@@ -27,6 +27,12 @@ sudo make install
 
 O executável será copiado para `$(PREFIX)/bin`.
 
+Para instalar a página de manual utilize:
+
+```bash
+sudo make manpage
+```
+
 ## Criação do pacote Debian
 
 É possível gerar um pacote `.deb` executando:
@@ -40,6 +46,8 @@ O arquivo `Concreto.deb` será criado e pode ser instalado com:
 ```bash
 sudo dpkg -i Concreto.deb
 ```
+
+O pacote já inclui a página de manual em `man1/concreto.1.gz`.
 
 ## Uso
 
