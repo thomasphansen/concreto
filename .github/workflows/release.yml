@@ -17,7 +17,7 @@ jobs:
       - name: Configure
         run: ./configure
       - name: Build Debian package
-        run: make deb
+        run: make deb VERSION=${{ github.event.release.tag_name }}
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:

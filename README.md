@@ -49,5 +49,5 @@ Execute passando o traço no formato `a-b-c`, a granulometria do agregado graúd
 ./concreto 1-2-3 20 1.0
 ```
 
-O programa exibirá as quantidades de cimento, água, areia e brita necessárias para produzir o volume informado.
+O programa exibirá as quantidades de cimento, água, areia e brita necessárias para produzir o volume informado. Os volumes são mostrados em litros.
 
