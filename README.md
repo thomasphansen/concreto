@@ -26,7 +26,8 @@ sudo make install
 ```
 
 O executável será copiado para `$(PREFIX)/bin`.
-O binário compilado fica disponível em `build/concreto`.
+Os binários compilados ficam disponíveis em `build/concreto` (CLI) e
+`build/concreto-gui` (interface gráfica Qt).
 
 Para instalar a página de manual utilize:
 
@@ -59,4 +60,6 @@ Execute passando o traço no formato `a-b-c`, a granulometria do agregado graúd
 ```
 
 O programa exibirá as quantidades de cimento, água, areia e brita necessárias para produzir o volume informado. Os volumes são mostrados em litros.
+
+Também é possível utilizar a interface gráfica executando `concreto-gui` após a instalação ou abrindo o atalho criado pelo pacote.
 

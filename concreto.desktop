@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Concreto
+Exec=concreto-gui
+Comment=Concrete mix calculator
+Terminal=false
+Categories=Utility;

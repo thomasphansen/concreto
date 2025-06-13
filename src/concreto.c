@@ -39,7 +39,7 @@ Masses compute_masses(Volumes volumes, double granulometry) {
     return m;
 }
 
-#ifndef UNIT_TEST
+#if !defined(UNIT_TEST) && !defined(WITHOUT_MAIN)
 int main(int argc, char *argv[]) {
     if (argc != 4) {
         fprintf(stderr, "Uso: %s <traco a-b-c> <granulometria_mm> <volume_m3>\n", argv[0]);
